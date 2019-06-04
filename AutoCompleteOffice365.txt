@@ -1,0 +1,36 @@
+<script language="javascript" type="text/javascript" src="//code.jquery.com/jquery-1.6.2.min.js" ></script>
+<script language="javascript" type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery.SPServices/2014.02/jquery.SPServices-2014.02.min.js" >
+<script language="javascript" type="text/javascript" src="/_layouts/15/clientpeoplepicker.js"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.css" rel="stylesheet"/>
+</script>
+<script type="text/javascript"> 
+   $(document).ready(function () {
+       $().SPServices.SPAutocomplete({ 
+           sourceList: "AutoComplete", // Source List Name 
+           sourceColumn: "Title", // Source List Column from where you want to fetch it.            
+           columnName: "Title", // Destination List Column where you wan to add it.            
+           ignoreCase: true,            
+           numChars: 2,            
+           slideDownSpeed: 'fast'        
+        }); 
+	   $().SPServices.SPArrangeChoices({
+    columnName: "Location", // List Column you need to Arrange Choices.
+    perRow: 7
+		}); 
+var userName = $().SPServices.SPGetCurrentUser({fieldName: "name"});
+	alert(userName);
+	  window.setTimeout(function() {
+      SetAndResolvePeoplePicker("FeedbackProvider", userName);
+      }, 3000);
+});
+function SetAndResolvePeoplePicker(fieldName,Name) 
+{
+ 
+		var controlName = fieldName;
+		var peoplePickerDiv = jQuery("[id$='ClientPeoplePicker'][title='" + controlName + "']");
+	    var peoplePickerEditor = peoplePickerDiv.find("[title='" + controlName + "']");
+		var spPeoplePicker = SPClientPeoplePicker.SPClientPeoplePickerDict[peoplePickerDiv[0].id];
+		peoplePickerEditor.val(Name);
+		spPeoplePicker.AddUnresolvedUserFromEditor(true);  
+}
+</script>
