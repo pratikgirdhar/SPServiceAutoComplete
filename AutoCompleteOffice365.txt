@@ -20,7 +20,7 @@
 var userName = $().SPServices.SPGetCurrentUser({fieldName: "name"});
 	alert(userName);
 	  window.setTimeout(function() {
-      SetAndResolvePeoplePicker("FeedbackProvider", userName);
+      SetAndResolvePeoplePicker("FeedbackProvider", userName); // Where FeedbackProvider is the name of PeoplePicker column in SP List.
       }, 3000);
 });
 function SetAndResolvePeoplePicker(fieldName,Name) 
